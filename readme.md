@@ -1,0 +1,1 @@
+This is a test project testing docker for deployments to aws lightsail
