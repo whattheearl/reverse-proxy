@@ -7,7 +7,12 @@ this is intended to be a minimum deployment as well as a test environment
 - docker-compose
 - git
 
-`./scripts/setup.sh`
+`./scripts/setup_aws_linux2.sh`
 
 ## 1. Deploy reverse proxy with express api
-`docker-compose up -d`
+ssh to machine
+
+```
+cd /express
+docker-compose up -d
+```
