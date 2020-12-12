@@ -20,3 +20,5 @@ sudo curl -L  https://github.com/docker/compose/releases/latest/download/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 (crontab -l 2>/dev/null; echo "@reboot /express/deploy.sh") | crontab -
+
+sudo reboot

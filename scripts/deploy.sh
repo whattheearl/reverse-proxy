@@ -1,3 +1,6 @@
+echo removing project
+rm -rf /express
+
 echo "cloning https://github.com/whattheearl/reverse-proxy.git to /express"
 git clone https://github.com/whattheearl/reverse-proxy.git /express
 
