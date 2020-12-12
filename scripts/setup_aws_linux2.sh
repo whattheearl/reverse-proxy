@@ -23,8 +23,8 @@ sudo curl -L  https://github.com/docker/compose/releases/latest/download/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 echo downloading deploy script
-sudo curl https://raw.githubusercontent.com/whattheearl/reverse-proxy/main/scripts/deploy.sh --output ~/deploy.sh
-sudo chmod +x ~/deploy.sh
+curl https://raw.githubusercontent.com/whattheearl/reverse-proxy/main/scripts/deploy.sh --output ~/deploy.sh
+chmod +x ~/deploy.sh
 
 echo "adding crontab for deploy script" >> ~/logs/setup.txt
 (crontab -l 2>/dev/null; echo "@reboot ~/deploy.sh") | crontab -
