@@ -1,6 +1,7 @@
 #!/bin/bash
-
 EC2HOME="/home/ec2-user"
+LOG="${EC2HOME}/logs/deploy"
+echo "$EUID $UID" >> LOG
 
 echo removing project
 sudo rm -rf "${EC2HOME}/express"
