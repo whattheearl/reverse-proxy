@@ -25,11 +25,4 @@ echo installing docker-compose >> $LOGFILE
 sudo curl -L  https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-echo downloading deploy script
-sudo curl https://raw.githubusercontent.com/whattheearl/reverse-proxy/main/scripts/deploy.sh --output "${EC2HOME}/deploy.sh"
-sudo chmod +x "${EC2HOME}/deploy.sh"
-
-echo "adding crontab for deploy script" >> $LOGFILE
-(sudo crontab -u "ec2-user" -l 2>/dev/null; echo "@reboot ${EC2HOME}/deploy.sh") | sudo crontab -u "ec2-user" -
-
 sudo reboot
