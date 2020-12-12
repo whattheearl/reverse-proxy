@@ -1,6 +1,9 @@
 #!/bin/bash
 EC2HOME="/home/ec2-user"
 LOG="${EC2HOME}/logs/deploy"
+
+sudo mkdir "${EC2HOME}/logs"
+sudo touch $LOG
 echo "$EUID $UID" >> $LOG
 
 echo removing project
