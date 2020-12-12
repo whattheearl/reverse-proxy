@@ -1,32 +1,35 @@
 #!/bin/bash
-mkdir ~/logs
-touch ~/logs/setup.txt
+EC2HOME="/home/ec2-user"
+LOGFILE="${EC2HOME}/logs/setup.txt"
 
-echo  installing docker >> ~/logs/setup.txt
+sudo mkdir "${EC2HOME}/logs"
+sudo touch "${EC2HOME}/setup.txt"
+
+echo  installing docker >> $LOGFILE
 sudo amazon-linux-extras install docker
 
-echo start docker >> ~/logs/setup.txt
+echo start docker >> $LOGFILE
 sudo service docker start
 
-echo add ec2-user to docker group >> ~/logs/setup.txt
+echo add ec2-user to docker group >>  $LOGFILE
 sudo usermod -a -G docker ec2-user
 
-echo auto start docker >> ~/logs/setup.txt
+echo auto start docker >> $LOGFILE
 sudo chkconfig docker on
 
-echo installing git >> ~/logs/setup.txt
+echo installing git >> $LOGFILE
 sudo yum install -y git
 
 # reboot?
-echo installing docker-compose >> ~/logs/setup.txt
+echo installing docker-compose >> $LOGFILE
 sudo curl -L  https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
 echo downloading deploy script
-curl https://raw.githubusercontent.com/whattheearl/reverse-proxy/main/scripts/deploy.sh --output ~/deploy.sh
-chmod +x ~/deploy.sh
+sudo curl https://raw.githubusercontent.com/whattheearl/reverse-proxy/main/scripts/deploy.sh --output ~/deploy.sh
+sudo chmod +x ~/deploy.sh
 
-echo "adding crontab for deploy script" >> ~/logs/setup.txt
-(crontab -l 2>/dev/null; echo "@reboot ~/deploy.sh") | crontab -
+echo "adding crontab for deploy script" >> $LOGFILE
+(sudo crontab -u "ec2-user" -l 2>/dev/null; echo "@reboot ~/deploy.sh") | sudo crontab -u "ec2-user" -
 
 sudo reboot
